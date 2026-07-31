@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextDev AI - Next-Gen Tech Job Board & AI Resume Matcher</title>
+    <meta name="description" content="Find top tech jobs in AI, Full Stack, Cloud, and Engineering. Analyze your resume match score in real-time with AI.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Glow Blobs -->
+    <div class="glow-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar glass-panel">
+        <div class="nav-container">
+            <a href="#" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-brain-circuit"></i></div>
+                <span class="brand-name">NextDev<span class="brand-accent">.AI</span></span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#jobs-section" class="nav-link active"><i class="fa-solid fa-briefcase"></i> Find Jobs</a>
+                <a href="#ai-matcher" class="nav-link" id="nav-ai-matcher"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Matcher</a>
+                <a href="#post-job" class="nav-link" id="nav-post-job"><i class="fa-solid fa-plus-circle"></i> Post a Job</a>
+                <a href="#saved-jobs" class="nav-link" id="nav-saved-jobs"><i class="fa-solid fa-bookmark"></i> Saved (<span id="saved-count">0</span>)</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="btn btn-outline" id="theme-toggle-btn" title="Toggle Theme">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                </button>
+                <button class="btn btn-primary" id="btn-hero-ai-match">
+                    <i class="fa-solid fa-sparkles"></i> Check AI Resume Score
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="hero-container">
+            <div class="badge-pill">
+                <span class="badge-dot"></span> Powered by AI Resume Engine v2.4
+            </div>
+            <h1 class="hero-title">
+                Find Your Dream Tech Role <br>Matched by <span class="gradient-text">Artificial Intelligence</span>
+            </h1>
+            <p class="hero-subtitle">
+                Explore 150+ verified engineering, AI/ML, and tech jobs in Hyderabad, Remote & global hubs. Test your resume compatibility instantly.
+            </p>
+
+            <!-- Search & Filter Bar -->
+            <div class="search-box-container glass-panel">
+                <div class="search-field">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="search-query" placeholder="Job title, skills (e.g. React, Python, AWS)...">
+                </div>
+
+                <div class="divider-v"></div>
+
+                <div class="search-field">
+                    <i class="fa-solid fa-location-dot search-icon"></i>
+                    <select id="location-filter">
+                        <option value="all">All Locations</option>
+                        <option value="Hyderabad">Hyderabad, IN</option>
+                        <option value="Remote">Remote</option>
+                        <option value="Bengaluru">Bengaluru, IN</option>
+                        <option value="Pune">Pune, IN</option>
+                    </select>
+                </div>
+
+                <div class="divider-v"></div>
+
+                <div class="search-field">
+                    <i class="fa-solid fa-clock search-icon"></i>
+                    <select id="jobtype-filter">
+                        <option value="all">All Types</option>
+                        <option value="Full-time">Full-time</option>
+                        <option value="Contract">Contract</option>
+                        <option value="Part-time">Part-time</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-gradient btn-search" id="btn-search-trigger">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search Jobs
+                </button>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="stats-row">
+                <div class="stat-item glass-card">
+                    <span class="stat-number" id="stat-active-jobs">142+</span>
+                    <span class="stat-label">Active Tech Roles</span>
+                </div>
+                <div class="stat-item glass-card">
+                    <span class="stat-number">94.8%</span>
+                    <span class="stat-label">AI Match Accuracy</span>
+                </div>
+                <div class="stat-item glass-card">
+                    <span class="stat-number">48 hrs</span>
+                    <span class="stat-label">Avg Interview Response</span>
+                </div>
+                <div class="stat-item glass-card">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Companies Hiring</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content" id="jobs-section">
+        <div class="main-container">
+            <!-- Category Tabs -->
+            <div class="category-tabs-wrapper">
+                <div class="category-tabs">
+                    <button class="tab-btn active" data-category="all"><i class="fa-solid fa-border-all"></i> All Roles</button>
+                    <button class="tab-btn" data-category="AI/ML"><i class="fa-solid fa-microchip"></i> AI & ML</button>
+                    <button class="tab-btn" data-category="Full Stack"><i class="fa-solid fa-layer-group"></i> Full Stack</button>
+                    <button class="tab-btn" data-category="Frontend"><i class="fa-solid fa-code"></i> Frontend</button>
+                    <button class="tab-btn" data-category="Backend"><i class="fa-solid fa-server"></i> Backend</button>
+                    <button class="tab-btn" data-category="DevOps"><i class="fa-solid fa-cloud-arrow-up"></i> Cloud & DevOps</button>
+                </div>
+            </div>
+
+            <!-- Layout Grid: Jobs List + Sidebar -->
+            <div class="content-grid">
+                <!-- Left: Job Feed -->
+                <section class="job-feed-section">
+                    <div class="feed-header">
+                        <div class="feed-info">
+                            <h2>Featured Opportunities</h2>
+                            <p class="feed-subtitle">Showing <span id="visible-job-count">0</span> verified tech listings</p>
+                        </div>
+                        <div class="feed-controls">
+                            <label for="sort-select">Sort by:</label>
+                            <select id="sort-select" class="glass-select">
+                                <option value="newest">Newest First</option>
+                                <option value="salary">Highest Salary</option>
+                                <option value="match">Recommended</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Job Cards Container -->
+                    <div class="jobs-list" id="jobs-list-container">
+                        <!-- Dynamic Job Cards will be rendered here via app.js -->
+                    </div>
+                </section>
+
+                <!-- Right: Interactive Sidebar -->
+                <aside class="sidebar-section">
+                    <!-- AI Resume Widget Card -->
+                    <div class="sidebar-card glass-card widget-ai">
+                        <div class="widget-badge"><i class="fa-solid fa-sparkles"></i> AI Feature</div>
+                        <h3>Check Your Resume Compatibility</h3>
+                        <p>Paste your resume text to get an instant match score and missing keyword analysis for any job.</p>
+                        <button class="btn btn-gradient btn-block" id="btn-open-ai-modal">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Launch Resume Analyzer
+                        </button>
+                    </div>
+
+                    <!-- Post Job Promo Card -->
+                    <div class="sidebar-card glass-card widget-post">
+                        <div class="widget-icon"><i class="fa-solid fa-building-user"></i></div>
+                        <h3>Hiring Tech Talent in Hyderabad?</h3>
+                        <p>Post your job listing to reach over 10,000 verified AI & Software Developers.</p>
+                        <button class="btn btn-outline btn-block" id="btn-open-post-job">
+                            <i class="fa-solid fa-plus"></i> Post a Job Listing
+                        </button>
+                    </div>
+
+                    <!-- Top Companies Hiring -->
+                    <div class="sidebar-card glass-card widget-companies">
+                        <h3>Top Companies Hiring</h3>
+                        <div class="company-list">
+                            <div class="company-item">
+                                <div class="company-logo logo-g2c">G2C</div>
+                                <div class="company-details">
+                                    <h4>Globalco Dev Tech</h4>
+                                    <span>Hyderabad • 12 Openings</span>
+                                </div>
+                            </div>
+                            <div class="company-item">
+                                <div class="company-logo logo-nv">NV</div>
+                                <div class="company-details">
+                                    <h4>NeuralVibe AI</h4>
+                                    <span>Remote • 8 Openings</span>
+                                </div>
+                            </div>
+                            <div class="company-item">
+                                <div class="company-logo logo-cloud">CS</div>
+                                <div class="company-details">
+                                    <h4>CloudStack Inc</h4>
+                                    <span>Bengaluru • 5 Openings</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-icon"><i class="fa-solid fa-brain-circuit"></i></div>
+                <span class="brand-name">NextDev<span class="brand-accent">.AI</span></span>
+                <p>AI-Powered Job Board & Skill Matcher Platform developed for Candidate Assessment.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="#jobs-section">Browse Jobs</a>
+                    <a href="#" id="link-ai-analyzer">AI Analyzer</a>
+                    <a href="#" id="link-post-job">Post a Job</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Tech Stack</h4>
+                    <span>HTML5 & CSS3</span>
+                    <span>Vanilla JavaScript (ES6+)</span>
+                    <span>GitHub Actions CI/CD</span>
+                    <span>Vercel Cloud</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 NextDev AI. Built with AI tools for Globalco Software Developer Assessment.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: AI RESUME MATCHER -->
+    <div class="modal-backdrop" id="ai-modal-backdrop">
+        <div class="modal-box glass-panel modal-lg">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <i class="fa-solid fa-wand-magic-sparkles modal-icon"></i>
+                    <div>
+                        <h2>AI Resume Matcher & Skill Gap Analyzer</h2>
+                        <p class="modal-sub">Compare your resume against selected job descriptions to compute compatibility.</p>
+                    </div>
+                </div>
+                <button class="modal-close-btn" id="close-ai-modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="ai-input-grid">
+                    <div class="form-group">
+                        <label for="ai-select-job">Target Job Role:</label>
+                        <select id="ai-select-job" class="glass-input">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ai-resume-text">Paste Your Resume Content / Skills Summary:</label>
+                        <textarea id="ai-resume-text" class="glass-input" rows="7" placeholder="Paste your experience, key tech stack (e.g. React, Node.js, Python, PostgreSQL, Docker, AWS, Git)..."></textarea>
+                    </div>
+                </div>
+
+                <div class="ai-actions">
+                    <button class="btn btn-gradient btn-block" id="btn-run-ai-match">
+                        <i class="fa-solid fa-bolt"></i> Analyze Compatibility Now
+                    </button>
+                </div>
+
+                <!-- AI Results Container -->
+                <div class="ai-results-container hidden" id="ai-results-wrapper">
+                    <div class="divider-h"></div>
+                    <div class="score-card">
+                        <div class="score-radial-wrapper">
+                            <div class="score-radial" id="score-meter" style="--percentage: 0%">
+                                <span class="score-val" id="score-text">0%</span>
+                            </div>
+                        </div>
+                        <div class="score-summary">
+                            <h3 id="score-headline">Analyzing...</h3>
+                            <p id="score-feedback">Your skill match recommendation will appear here.</p>
+                        </div>
+                    </div>
+
+                    <div class="insights-grid">
+                        <div class="insight-box match-box">
+                            <h4><i class="fa-solid fa-circle-check"></i> Matched Keywords</h4>
+                            <div class="keyword-tags" id="matched-tags"></div>
+                        </div>
+                        <div class="insight-box missing-box">
+                            <h4><i class="fa-solid fa-circle-exclamation"></i> Recommended Additions</h4>
+                            <div class="keyword-tags" id="missing-tags"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: JOB DETAILS & QUICK APPLY -->
+    <div class="modal-backdrop" id="job-details-backdrop">
+        <div class="modal-box glass-panel modal-lg">
+            <div class="modal-header">
+                <div class="company-badge-group">
+                    <div class="company-avatar" id="detail-company-logo">GC</div>
+                    <div>
+                        <h2 id="detail-job-title">Software Developer</h2>
+                        <span id="detail-company-name" class="detail-subtitle">Globalco Dev • Hyderabad, IN</span>
+                    </div>
+                </div>
+                <button class="modal-close-btn" id="close-job-details">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="job-meta-row">
+                    <span class="meta-tag" id="detail-location"><i class="fa-solid fa-location-dot"></i> Hyderabad</span>
+                    <span class="meta-tag" id="detail-jobtype"><i class="fa-solid fa-briefcase"></i> Full-time</span>
+                    <span class="meta-tag" id="detail-salary"><i class="fa-solid fa-money-bill-wave"></i> ₹12 - ₹18 LPA</span>
+                    <span class="meta-tag badge-category" id="detail-category">AI/ML</span>
+                </div>
+
+                <div class="job-description-block">
+                    <h3>Role Overview</h3>
+                    <p id="detail-description">Description loading...</p>
+
+                    <h3>Key Requirements & Skills</h3>
+                    <ul class="skills-list-bullets" id="detail-skills-list">
+                        <!-- Populated dynamically -->
+                    </ul>
+                </div>
+
+                <div class="divider-h"></div>
+
+                <!-- Quick Apply Form -->
+                <div class="apply-form-section">
+                    <h3>Apply for this position</h3>
+                    <form id="quick-apply-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="apply-name">Full Name *</label>
+                                <input type="text" id="apply-name" class="glass-input" placeholder="e.g. Rahul Sharma" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apply-email">Email Address *</label>
+                                <input type="email" id="apply-email" class="glass-input" placeholder="you@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="apply-portfolio">GitHub / Portfolio URL</label>
+                                <input type="url" id="apply-portfolio" class="glass-input" placeholder="https://github.com/username">
+                            </div>
+                            <div class="form-group">
+                                <label for="apply-experience">Years of Experience</label>
+                                <select id="apply-experience" class="glass-input">
+                                    <option value="0-1">0 - 1 years (Entry/Junior)</option>
+                                    <option value="1-3">1 - 3 years (Mid Level)</option>
+                                    <option value="3-5">3 - 5 years (Senior)</option>
+                                    <option value="5+">5+ years (Lead/Principal)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apply-note">Brief Cover Note / Pitch</label>
+                            <textarea id="apply-note" class="glass-input" rows="3" placeholder="Tell the recruiter why you are a great fit for this position..."></textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline" id="btn-cancel-apply">Cancel</button>
+                            <button type="submit" class="btn btn-gradient"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: POST A JOB -->
+    <div class="modal-backdrop" id="post-job-backdrop">
+        <div class="modal-box glass-panel modal-md">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-circle-plus"></i> Post a New Job Listing</h2>
+                <button class="modal-close-btn" id="close-post-job">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="create-job-form">
+                    <div class="form-group">
+                        <label for="new-job-title">Job Title *</label>
+                        <input type="text" id="new-job-title" class="glass-input" placeholder="e.g. Senior Full Stack Engineer" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="new-company-name">Company Name *</label>
+                            <input type="text" id="new-company-name" class="glass-input" placeholder="e.g. Globalco Dev" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-category">Category *</label>
+                            <select id="new-category" class="glass-input">
+                                <option value="Full Stack">Full Stack</option>
+                                <option value="AI/ML">AI & ML</option>
+                                <option value="Frontend">Frontend</option>
+                                <option value="Backend">Backend</option>
+                                <option value="DevOps">DevOps</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="new-location">Location *</label>
+                            <input type="text" id="new-location" class="glass-input" placeholder="e.g. Hyderabad, IN or Remote" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-jobtype">Job Type *</label>
+                            <select id="new-jobtype" class="glass-input">
+                                <option value="Full-time">Full-time</option>
+                                <option value="Contract">Contract</option>
+                                <option value="Part-time">Part-time</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new-salary">Salary Range</label>
+                        <input type="text" id="new-salary" class="glass-input" placeholder="e.g. ₹15 - ₹25 LPA or $90k - $120k">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new-tags">Tech Stack / Required Skills (comma separated)</label>
+                        <input type="text" id="new-tags" class="glass-input" placeholder="e.g. React, Python, PyTorch, Docker, PostgreSQL">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new-description">Job Description *</label>
+                        <textarea id="new-description" class="glass-input" rows="4" placeholder="Describe the responsibilities and team culture..." required></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline" id="btn-cancel-post">Cancel</button>
+                        <button type="submit" class="btn btn-gradient"><i class="fa-solid fa-check"></i> Publish Job Listing</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification System -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- JavaScript Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
