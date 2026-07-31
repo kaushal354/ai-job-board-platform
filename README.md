@@ -2,9 +2,9 @@
 
 > **Technical Assessment Submission** for Software Developer (Onsite) Position at **Globalco Dev Tech**.
 
-![NextDev AI Banner](https://img.shields.io/badge/Deployment-Vercel-success?style=for-the-badge&logo=vercel)
-![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-blue?style=for-the-badge&logo=githubactions)
-![Tech Stack](https://img.shields.io/badge/Frontend-HTML5_--_CSS3_--_ES6_JS-orange?style=for-the-badge)
+[![Deployment Status](https://img.shields.io/badge/Deployment-Vercel_Live-success?style=for-the-badge&logo=vercel)](https://ai-job-board-platform-nine.vercel.app)
+[![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-blue?style=for-the-badge&logo=githubactions)](https://github.com/kaushal354/ai-job-board-platform/actions)
+[![Tech Stack](https://img.shields.io/badge/Frontend-HTML5_--_CSS3_--_ES6_JS-orange?style=for-the-badge)](https://github.com/kaushal354/ai-job-board-platform)
 
 ---
 
@@ -48,7 +48,7 @@
 
 ## ⚙️ CI/CD Pipeline Workflow
 
-The project contains a automated CI/CD pipeline defined in `.github/workflows/deploy.yml`:
+The project contains an automated CI/CD pipeline defined in `.github/workflows/deploy.yml`:
 
 ```mermaid
 graph TD
@@ -60,7 +60,7 @@ graph TD
 ```
 
 1. **Build & Validation Stage**: Checks structural integrity of `index.html`, `style.css`, and `app.js`.
-2. **Automated Test Stage**: Executes build verification scripts.
+2. **Automated Test Stage**: Executes build verification scripts and dist bundling.
 3. **Vercel Cloud Deployment**: Triggered automatically on push to the `main` branch to push static assets to Vercel's global CDN.
 
 ---
@@ -69,14 +69,14 @@ graph TD
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/<your-username>/nextdev-ai-job-board.git
-   cd nextdev-ai-job-board
+   git clone https://github.com/kaushal354/ai-job-board-platform.git
+   cd ai-job-board-platform
    ```
 
 2. **Run Locally**:
    Simply open `index.html` in any browser or use a local static server:
    ```bash
-   npx serve .
+   npx serve dist
    ```
 
 3. **Open in Browser**:
@@ -89,16 +89,18 @@ graph TD
 | Email Assessment Step | Status | Implementation Details |
 | :--- | :---: | :--- |
 | **1- Build web app using AI** | ✅ Completed | Built NextDev AI Job Board & Resume Analyzer |
-| **2- Push code to GIT** | ✅ Completed | Initialized Git repository with clean commits |
+| **2- Push code to GIT** | ✅ Completed | Pushed clean commits to GitHub (`kaushal354/ai-job-board-platform`) |
 | **3- Write CI/CD pipeline on GIT** | ✅ Completed | Configured `.github/workflows/deploy.yml` |
-| **4- Deploy to Vercel via CI/CD** | ✅ Completed | Configured `vercel.json` & Vercel deployment |
+| **4- Deploy to Vercel via CI/CD** | ✅ Completed | Configured `vercel.json` & Vercel deployment (`ai-job-board-platform-nine.vercel.app`) |
 | **5- Write documentation using AI** | ✅ Completed | Comprehensive `README.md` & Architecture |
-| **6- Send to recruiter thread** | ⏳ Ready | Follow submission instructions below |
+| **6- Send to recruiter thread** | ✅ Ready | Complete submission email ready for reply |
 
 ---
 
 ## ✉️ Submission Details
 
-- **Candidate Name**: Software Developer Candidate
+- **Candidate Name**: Kaushal Prasad
 - **Target Role**: Software Developer (Onsite - Hyderabad, India)
 - **Email Thread**: Janine Exporna `<janine@g2c.dev>` (Globalco)
+- **Live Vercel Demo**: [https://ai-job-board-platform-nine.vercel.app](https://ai-job-board-platform-nine.vercel.app)
+- **GitHub Repository**: [https://github.com/kaushal354/ai-job-board-platform](https://github.com/kaushal354/ai-job-board-platform)
