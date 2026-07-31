@@ -4,8 +4,8 @@
   "description": "AI-Powered Job Board & Resume Analyzer Platform for Tech Professionals",
   "main": "index.html",
   "scripts": {
-    "start": "npx serve .",
-    "build": "echo 'Static build completed successfully.'",
+    "start": "npx serve dist",
+    "build": "node -e \"const fs=require('fs'); fs.mkdirSync('dist',{recursive:true}); ['index.html','style.css','app.js'].forEach(f=>fs.copyFileSync(f,'dist/'+f));console.log('Dist bundle created successfully!');\"",
     "test": "echo 'All CI test checks passed successfully.'"
   },
   "keywords": [
